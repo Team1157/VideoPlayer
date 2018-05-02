@@ -1,24 +1,24 @@
+#!/bin/sh
 sudo pkill omxplayer
 
-omxplayer --loop --fs ./Video.mp4
-# get rid of the cursor
+#omxplayer --loop --fs ./Video.mp4
+
+# get rid of the cursor so we don't see it when videos are running
 setterm -cursor off
 
 # set here the path to the directory containing your videos
-VideoLocation="./Videos"
-# you can probably leave this alone
-Process="omxplayer"
-# our loop
-while true; do
-        if ps ax | grep -v grep | grep $Process > /dev/null
-        then
-        sleep 1;
-else
-        for entry in $VideoLocation/*
-        do
-                clear
-                # -r for stretched over the entire location
-                omxplayer --device x11 -r $entry > /dev/null
-        done
-fi
+VIDEOPATH="/mnt/storage/videos" 
+
+# you can normally leave this alone
+SERVICE="omxplayer"
+
+for entry in $VIDEOPATH/*
+do
+    clear
+    $SERVICE $entry > /dev/null
+
+    while ps ax | grep -v grep | grep $SERVICE > /dev/null
+    do
+        sleep 5;
+    done
 done
