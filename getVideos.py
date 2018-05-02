@@ -10,7 +10,7 @@ with open('Videos.txt', 'r') as f:
 if newVideoList:
     for Video in newVideoList:
         name = re.findall(r".*\/(.*)", Video)[0]
-        if not name in os.listdir("Videos"):
+        if not name in s.listdir("Videos"):
             subprocess.call("cd Videos && wget %s" % Video, shell=True)
         else:
             print("File does exist")

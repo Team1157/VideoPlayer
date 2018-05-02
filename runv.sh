@@ -15,5 +15,7 @@ do
   for entry in $VIDEOPATH/*
   do
     omxplayer --device x11 --no-osd $entry
+    xset dpms force off
+    xset dpms force on
   done
 done
