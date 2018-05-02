@@ -7,18 +7,13 @@ sudo pkill omxplayer
 setterm -cursor off
 
 # set here the path to the directory containing your videos
-VIDEOPATH="/mnt/storage/videos" 
+VIDEOPATH="./Videos"
 
 # you can normally leave this alone
-SERVICE="omxplayer"
-
-for entry in $VIDEOPATH/*
+while true
 do
-    clear
-    $SERVICE $entry > /dev/null
-
-    while ps ax | grep -v grep | grep $SERVICE > /dev/null
-    do
-        sleep 5;
-    done
+  for entry in $VIDEOPATH/*
+  do
+    omxplayer --device x11 --no-osd $entry
+  done
 done
